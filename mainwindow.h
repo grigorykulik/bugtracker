@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QString>
-#include "newbugdata.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,13 +17,10 @@ public:
     ~MainWindow();
 
 public slots:
-    void recieveData(QString str1,QString str2,QString str3, QString str4, QString str5);
     void on_addButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    NewBugData *BugData;
-    QString Environment, BugNumber, Description, SystemAffected, ProductAffected;
 
 };
 #endif // MAINWINDOW_H
