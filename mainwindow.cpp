@@ -64,8 +64,11 @@ void MainWindow::on_removeButton_clicked()
             msgBox.exec();
         }
 
-        else ui->tableWidget->removeRow(RowToBeRemoved);
-        removeBug(&Bugs, RowToBeRemoved);
+        else
+        {
+            ui->tableWidget->removeRow(RowToBeRemoved);
+            removeBug(&Bugs, RowToBeRemoved);
+        }
 }
 
 //add a bug to the list
@@ -89,73 +92,120 @@ void MainWindow::removeBug(std::vector<Bug> *Bugs, int Row)
 //update statistics
 void MainWindow::updateStatistics(std::vector<Bug> *Bugs)
 {
-    int BugsOnEnv1=0;
-    int BugsOnEnv2=0;
-    int BugsOnSystem1=0;
-    int BugsOnSystem2=0;
-    int BugsOnSystem3=0;
-    int BugsOnSystem4=0;
-    int BugsOnSystem5=0;
-    int BugsOnProduct1=0;
+    int BugsInEnv1=0;
+    int BugsInEnv2=0;
+    int BugsInSystem1=0;
+    int BugsInSystem2=0;
+    int BugsInSystem3=0;
+    int BugsInSystem4=0;
+    int BugsInSystem5=0;
+    int BugsInProduct1=0;
+    int BugsInProduct2=0;
+    int BugsInProduct3=0;
+    int BugsInProduct4=0;
+    int BugsInProduct5=0;
 
     //show the total number of bugs
-    ui->label_1->setText(QString::number(Bugs->size()));
+    ui->BugsTotalLabel->setText(QString::number(Bugs->size()));
 
     //count and show bugs on env 1
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getEnvironment()=="ENV 1") BugsOnEnv1++;
+        if (Bugs->at(i).getEnvironment()=="ENV 1") BugsInEnv1++;
     }
 
-    ui->BugsOnEnv1Label->setText(QString::number(BugsOnEnv1));
+    ui->BugsInEnv1Label->setText(QString::number(BugsInEnv1));
 
 //count and show bugs on env 2
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getEnvironment()=="ENV 2") BugsOnEnv2++;
+        if (Bugs->at(i).getEnvironment()=="ENV 2") BugsInEnv2++;
     }
 
-    ui->BugsOnEnv2Label->setText(QString::number(BugsOnEnv2));
+    ui->BugsInEnv2Label->setText(QString::number(BugsInEnv2));
 
 //count and show bugs on system 1
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 1") BugsOnSystem1++;
+        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 1") BugsInSystem1++;
     }
 
-    ui->BugsOnSystem1Label->setText(QString::number(BugsOnSystem1));
+    ui->BugsInSystem1Label->setText(QString::number(BugsInSystem1));
 
 //count and show bugs on system 2
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 2") BugsOnSystem2++;
+        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 2") BugsInSystem2++;
     }
 
-    ui->BugsOnSystem2Label->setText(QString::number(BugsOnSystem2));
+    ui->BugsInSystem2Label->setText(QString::number(BugsInSystem2));
 
 //count and show bugs on system 3
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 3") BugsOnSystem3++;
+        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 3") BugsInSystem3++;
     }
 
-    ui->BugsOnSystem3Label->setText(QString::number(BugsOnSystem3));
+    ui->BugsInSystem3Label->setText(QString::number(BugsInSystem3));
 
 //count and show bugs on system 4
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 4") BugsOnSystem4++;
+        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 4") BugsInSystem4++;
     }
 
-    ui->BugsOnSystem4Label->setText(QString::number(BugsOnSystem4));
+    ui->BugsInSystem4Label->setText(QString::number(BugsInSystem4));
 
 //count and show bugs on system 5
     for (size_t i=0; i<Bugs->size(); i++)
     {
-        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 5") BugsOnSystem5++;
+        if (Bugs->at(i).getAffectedSystem()=="SYSTEM 5") BugsInSystem5++;
     }
 
-    ui->BugsOnSystem5Label->setText(QString::number(BugsOnSystem5));
+    ui->BugsInSystem5Label->setText(QString::number(BugsInSystem5));
+
+//count and show bugs in prouct 1
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getAffectedProduct()=="PRODUCT 1") BugsInProduct1++;
+    }
+
+    ui->BugsInProduct1Label->setText(QString::number(BugsInProduct1));
+
+//count and show bugs in prouct 2
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getAffectedProduct()=="PRODUCT 2") BugsInProduct2++;
+    }
+
+    ui->BugsInProduct2Label->setText(QString::number(BugsInProduct2));
+
+//count and show bugs in prouct 3
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getAffectedProduct()=="PRODUCT 3") BugsInProduct3++;
+    }
+
+    ui->BugsInProduct3Label->setText(QString::number(BugsInProduct3));
+
+
+    //count and show bugs in prouct 4
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getAffectedProduct()=="PRODUCT 4") BugsInProduct4++;
+    }
+
+    ui->BugsInProduct4Label->setText(QString::number(BugsInProduct4));
+
+
+    //count and show bugs in prouct 5
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getAffectedProduct()=="PRODUCT 5") BugsInProduct5++;
+    }
+
+    ui->BugsInProduct5Label->setText(QString::number(BugsInProduct5));
+
 }
 
 
