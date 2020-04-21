@@ -9,7 +9,7 @@ Bug::Bug()
 //destructor
 Bug::~Bug()
 {
-    delete this;
+/*    delete this*//*;*/
 }
 
 //setters
