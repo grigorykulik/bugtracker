@@ -5,6 +5,7 @@
 #include <QString>
 #include "bug.h"
 #include <deque>
+#include "stats.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,8 +30,13 @@ private slots:
     void addBug(Bug bug);
     void removeBug(std::vector<Bug> *Bug, int Row);
 
+    void on_ChangeStatusPushButton_clicked();
+
+    void on_ShowStatsPushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QWidget stats;
 
 };
 #endif // MAINWINDOW_H

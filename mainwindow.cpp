@@ -104,6 +104,8 @@ void MainWindow::updateStatistics(std::vector<Bug> *Bugs)
     int BugsInProduct3=0;
     int BugsInProduct4=0;
     int BugsInProduct5=0;
+    int BugsInProgress=0;
+    int BugsOpen=0;
 
     //show the total number of bugs
     ui->BugsTotalLabel->setText(QString::number(Bugs->size()));
@@ -206,6 +208,65 @@ void MainWindow::updateStatistics(std::vector<Bug> *Bugs)
 
     ui->BugsInProduct5Label->setText(QString::number(BugsInProduct5));
 
+    //count and show bugs in progress
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getStatus()=="InProgress") BugsInProgress++;
+    }
+
+    ui->BugsInProgressLabel->setText(QString::number(BugsInProgress));
+
+    //count and show closed bugs
+    for (size_t i=0; i<Bugs->size(); i++)
+    {
+        if (Bugs->at(i).getStatus()=="Open") BugsOpen++;
+    }
+
+    ui->OpenBugsLabel->setText(QString::number(BugsOpen));
 }
 
 
+
+void MainWindow::on_ChangeStatusPushButton_clicked()
+{
+    int CurrentRow=ui->tableWidget->currentRow();
+
+    if (CurrentRow==0 && ui->tableWidget->rowCount()==1)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Cannot change status of an empty row");
+        msgBox.exec();
+    }
+
+    else
+    {
+        if (ui->ChangeStatusComboBox->currentText()=="InProgress")
+        {
+            for (int i=0; i<6; i++)
+            {
+                ui->tableWidget->item(CurrentRow, i)->setBackground(QBrush(QColor(255,255,153)));
+            }
+        }
+
+        else
+        {
+            for (int i=0; i<6; i++)
+            {
+                ui->tableWidget->item(CurrentRow, i)->setBackground(QBrush(QColor(51,255,51)));
+            }
+        }
+
+        QString NewStatus=ui->ChangeStatusComboBox->currentText();
+        Bugs.at(CurrentRow).setStatus(NewStatus);
+        ui->tableWidget->item(CurrentRow, 5)->setText(Bugs.at(CurrentRow).getStatus());
+
+        updateStatistics(&Bugs);
+    }
+}
+
+
+void MainWindow::on_ShowStatsPushButton_clicked()
+{
+    QWidget *stats=new QWidget();
+    stats->show();
+}

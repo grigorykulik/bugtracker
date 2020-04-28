@@ -108,8 +108,8 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>220</y>
-      <width>80</width>
+      <y>250</y>
+      <width>101</width>
       <height>24</height>
      </rect>
     </property>
@@ -124,8 +124,8 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>260</y>
-      <width>80</width>
+      <y>290</y>
+      <width>101</width>
       <height>24</height>
      </rect>
     </property>
@@ -910,6 +910,52 @@
       <string>PRODUCT 5</string>
      </property>
     </item>
+   </widget>
+   <widget class="QComboBox" name="ChangeStatusComboBox">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>210</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>InProgress</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Closed</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="ChangeStatusPushButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>330</y>
+      <width>101</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change status</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ShowStatsPushButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>370</y>
+      <width>101</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show stats</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
