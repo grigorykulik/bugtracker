@@ -20,6 +20,13 @@ public:
     ~MainWindow();
 
     std::vector<Bug> Bugs;
+    double BugsPercentageOnEnv1;
+    double BugsPercentageOnEnv2;
+
+    int BugsOpenToShowStatistics;
+    int BugsInProgressToShowStatistics;
+    int BugsInEnv1ToShowStatistics;
+    int BugsInEnv2ToShowStatistics;
 
 public slots:
     void on_addButton_clicked();
@@ -29,10 +36,9 @@ private slots:
     void updateStatistics(std::vector<Bug> *list);
     void addBug(Bug bug);
     void removeBug(std::vector<Bug> *Bug, int Row);
-
     void on_ChangeStatusPushButton_clicked();
-
     void on_ShowStatsPushButton_clicked();
+    void calculateStatistics();
 
 private:
     Ui::MainWindow *ui;

@@ -223,6 +223,11 @@ void MainWindow::updateStatistics(std::vector<Bug> *Bugs)
     }
 
     ui->OpenBugsLabel->setText(QString::number(BugsOpen));
+
+    BugsOpenToShowStatistics=BugsOpen;
+    BugsInProgressToShowStatistics=BugsInProgress;
+    BugsInEnv1ToShowStatistics=BugsInEnv1;
+    BugsInEnv2ToShowStatistics=BugsInEnv2;
 }
 
 
@@ -268,5 +273,15 @@ void MainWindow::on_ChangeStatusPushButton_clicked()
 void MainWindow::on_ShowStatsPushButton_clicked()
 {
     QWidget *stats=new QWidget();
+    stats->resize(900, 600);
     stats->show();
 }
+
+void MainWindow::calculateStatistics()
+    {
+        updateStatistics(&Bugs);
+        BugsPercentageOnEnv1=BugsInEnv1ToShowStatistics/(BugsOpenToShowStatistics+
+                                                             BugsInProgressToShowStatistics);
+        BugsPercentageOnEnv2=BugsInEnv2ToShowStatistics/(BugsOpenToShowStatistics+
+                                                             BugsInProgressToShowStatistics);
+    }
