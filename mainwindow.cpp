@@ -240,6 +240,18 @@ void MainWindow::updateStatistics(std::vector<Bug> *Bugs)
     BugsInProgressToShowStatistics=BugsInProgress;
     BugsInEnv1ToShowStatistics=BugsInEnv1;
     BugsInEnv2ToShowStatistics=BugsInEnv2;
+
+    BugsInSystem1ToShowStatistics=BugsInSystem1;
+    BugsInSystem2ToShowStatistics=BugsInSystem2;
+    BugsInSystem3ToShowStatistics=BugsInSystem3;
+    BugsInSystem4ToShowStatistics=BugsInSystem4;
+    BugsInSystem5ToShowStatistics=BugsInSystem5;
+
+    BugsInProduct1ToShowStatistics=BugsInProduct1;
+    BugsInProduct2ToShowStatistics=BugsInProduct2;
+    BugsInProduct3ToShowStatistics=BugsInProduct3;
+    BugsInProduct4ToShowStatistics=BugsInProduct4;
+    BugsInProduct5ToShowStatistics=BugsInProduct5;
 }
 
 
@@ -287,7 +299,8 @@ void MainWindow::on_ShowStatsPushButton_clicked()
     updateStatistics(&Bugs);
     calculateStatistics();
 
-    QtCharts::QChartView *stats=new QtCharts::QChartView();
+    //create and show stats on envs
+    QtCharts::QChartView *StatsOnEnvs=new QtCharts::QChartView();
 
     QtCharts::QPieSeries *series=new QtCharts::QPieSeries();
     series->append("Env1", BugsPercentageOnEnv1);
@@ -304,15 +317,86 @@ void MainWindow::on_ShowStatsPushButton_clicked()
     chart->setTitle("Bugs on environments");
     chart->legend()->hide();
 
-    stats->setChart(chart);
-    stats->setRenderHint(QPainter::Antialiasing);
+    StatsOnEnvs->setChart(chart);
+    StatsOnEnvs->setRenderHint(QPainter::Antialiasing);
 
-    stats->show();
+    StatsOnEnvs->show();
+
+    //create and show stats on systems
+    QtCharts::QBarSet *set0=new QtCharts::QBarSet("System 1");
+    QtCharts::QBarSet *set1=new QtCharts::QBarSet("System 2");
+    QtCharts::QBarSet *set2=new QtCharts::QBarSet("System 3");
+    QtCharts::QBarSet *set3=new QtCharts::QBarSet("System 4");
+    QtCharts::QBarSet *set4=new QtCharts::QBarSet("System 5");
+
+    *set0<<BugsInSystem1ToShowStatistics;
+    *set1<<BugsInSystem2ToShowStatistics;
+    *set2<<BugsInSystem3ToShowStatistics;
+    *set3<<BugsInSystem4ToShowStatistics;
+    *set4<<BugsInSystem5ToShowStatistics;
+
+    QtCharts::QBarSeries *BugsInSystemsBarSeries=new QtCharts::QBarSeries;
+    BugsInSystemsBarSeries->append(set0);
+    BugsInSystemsBarSeries->append(set1);
+    BugsInSystemsBarSeries->append(set2);
+    BugsInSystemsBarSeries->append(set3);
+    BugsInSystemsBarSeries->append(set4);
+
+    QtCharts::QChart *BugsInSystemsChart=new QtCharts::QChart;
+    BugsInSystemsChart->addSeries(BugsInSystemsBarSeries);
+    BugsInSystemsChart->setTitle("Bugs in systems");
+    BugsInSystemsChart->setAnimationOptions(QtCharts::QChart::AllAnimations);
+    QStringList categories;
+    categories<<"2020";
+    QtCharts::QBarCategoryAxis *axis=new QtCharts::QBarCategoryAxis();
+    axis->append(categories);
+    BugsInSystemsChart->createDefaultAxes();
+    BugsInSystemsChart->setAxisX(axis, series);
+    BugsInSystemsChart->legend()->setVisible(true);
+    BugsInSystemsChart->legend()->setAlignment(Qt::AlignBottom);
+    QtCharts::QChartView *BugsInSystemsChartView=new QtCharts::QChartView(BugsInSystemsChart);
+    BugsInSystemsChartView->show();
+
+    //create and show stats on products
+
+    QtCharts::QBarSet *set00=new QtCharts::QBarSet("Product 1");
+    QtCharts::QBarSet *set10=new QtCharts::QBarSet("Product 2");
+    QtCharts::QBarSet *set20=new QtCharts::QBarSet("Product 3");
+    QtCharts::QBarSet *set30=new QtCharts::QBarSet("Product 4");
+    QtCharts::QBarSet *set40=new QtCharts::QBarSet("Product 5");
+
+    *set00<<BugsInProduct1ToShowStatistics;
+    *set10<<BugsInProduct2ToShowStatistics;
+    *set20<<BugsInProduct3ToShowStatistics;
+    *set30<<BugsInProduct4ToShowStatistics;
+    *set40<<BugsInProduct5ToShowStatistics;
+
+    QtCharts::QBarSeries *BugsInProductsBarSeries=new QtCharts::QBarSeries;
+    BugsInProductsBarSeries->append(set00);
+    BugsInProductsBarSeries->append(set10);
+    BugsInProductsBarSeries->append(set20);
+    BugsInProductsBarSeries->append(set30);
+    BugsInProductsBarSeries->append(set40);
+
+    QtCharts::QChart *BugsInProductsChart=new QtCharts::QChart;
+    BugsInProductsChart->addSeries(BugsInProductsBarSeries);
+    BugsInProductsChart->setTitle("Bugs in systems");
+    BugsInProductsChart->setAnimationOptions(QtCharts::QChart::AllAnimations);
+    QStringList categories2;
+    categories2<<"2020";
+    QtCharts::QBarCategoryAxis *axis2=new QtCharts::QBarCategoryAxis();
+    axis->append(categories2);
+    BugsInProductsChart->createDefaultAxes();
+    BugsInProductsChart->setAxisX(axis2, series);
+    BugsInProductsChart->legend()->setVisible(true);
+    BugsInProductsChart->legend()->setAlignment(Qt::AlignBottom);
+    QtCharts::QChartView *BugsInProductsChartView=new QtCharts::QChartView(BugsInProductsChart);
+    BugsInProductsChartView->show();
+
 }
 
 void MainWindow::calculateStatistics()
     {
-        updateStatistics(&Bugs);
         BugsPercentageOnEnv1=BugsInEnv1ToShowStatistics/(BugsOpenToShowStatistics+
                                                              BugsInProgressToShowStatistics);
         BugsPercentageOnEnv2=BugsInEnv2ToShowStatistics/(BugsOpenToShowStatistics+
