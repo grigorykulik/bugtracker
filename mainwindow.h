@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtCharts/QChartView>
 #include <QMainWindow>
 #include <QString>
 #include "bug.h"
@@ -20,13 +21,11 @@ public:
     ~MainWindow();
 
     std::vector<Bug> Bugs;
-    double BugsPercentageOnEnv1;
-    double BugsPercentageOnEnv2;
 
-    int BugsOpenToShowStatistics;
-    int BugsInProgressToShowStatistics;
-    int BugsInEnv1ToShowStatistics;
-    int BugsInEnv2ToShowStatistics;
+    qreal BugsOpenToShowStatistics;
+    qreal BugsInProgressToShowStatistics;
+    qreal BugsInEnv1ToShowStatistics;
+    qreal BugsInEnv2ToShowStatistics;
 
 public slots:
     void on_addButton_clicked();
@@ -42,7 +41,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QWidget stats;
-
+    QtCharts::QChartView stats;
+    double BugsPercentageOnEnv1;
+    double BugsPercentageOnEnv2;
 };
 #endif // MAINWINDOW_H

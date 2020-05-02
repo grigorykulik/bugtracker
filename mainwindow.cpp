@@ -5,6 +5,18 @@
 #include "QMessageBox"
 #include "QList"
 
+#include "stats.h"
+#include <QtCharts/QChartView>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QLegend>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QHorizontalStackedBarSeries>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QCategoryAxis>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -272,8 +284,29 @@ void MainWindow::on_ChangeStatusPushButton_clicked()
 
 void MainWindow::on_ShowStatsPushButton_clicked()
 {
-    QWidget *stats=new QWidget();
-    stats->resize(900, 600);
+    updateStatistics(&Bugs);
+    calculateStatistics();
+
+    QtCharts::QChartView *stats=new QtCharts::QChartView();
+
+    QtCharts::QPieSeries *series=new QtCharts::QPieSeries();
+    series->append("Env1", BugsPercentageOnEnv1);
+    series->append("Env2", BugsPercentageOnEnv2);
+
+    QtCharts::QPieSlice *slice0=series->slices().at(0);
+    slice0->setLabelVisible();
+
+    QtCharts::QPieSlice *slice1=series->slices().at(1);
+    slice1->setLabelVisible();
+
+    QtCharts::QChart *chart=new QtCharts::QChart();
+    chart->addSeries(series);
+    chart->setTitle("Bugs on environments");
+    chart->legend()->hide();
+
+    stats->setChart(chart);
+    stats->setRenderHint(QPainter::Antialiasing);
+
     stats->show();
 }
 
@@ -283,5 +316,5 @@ void MainWindow::calculateStatistics()
         BugsPercentageOnEnv1=BugsInEnv1ToShowStatistics/(BugsOpenToShowStatistics+
                                                              BugsInProgressToShowStatistics);
         BugsPercentageOnEnv2=BugsInEnv2ToShowStatistics/(BugsOpenToShowStatistics+
-                                                             BugsInProgressToShowStatistics);
+                                            BugsInProgressToShowStatistics);
     }
