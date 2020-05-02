@@ -3,20 +3,10 @@
 
 #include <QWidget>
 
-namespace Ui {
-class Stats;
-}
-
-class Stats : public QWidget
+class stats
 {
-    Q_OBJECT
-
 public:
-    explicit Stats(QWidget *parent = nullptr);
-    ~Stats();
-
-private:
-    Ui::Stats *ui;
+    stats();
 };
 
 #endif // STATS_H

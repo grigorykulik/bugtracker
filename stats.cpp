@@ -1,3 +1,4 @@
+#include "stats.h"
 #include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
@@ -9,17 +10,7 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QCategoryAxis>
 
-#include "stats.h"
-#include "ui_stats.h"
-
-Stats::Stats(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Stats)
+stats::stats()
 {
-    ui->setupUi(this);
-}
 
-Stats::~Stats()
-{
-    delete ui;
 }
