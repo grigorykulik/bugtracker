@@ -69,7 +69,7 @@ void MainWindow::on_removeButton_clicked()
 {
         int RowToBeRemoved=ui->tableWidget->currentRow();
 
-        if (ui->tableWidget->rowCount()==1)
+        if (Bugs.empty())
         {
             QMessageBox msgBox;
             msgBox.setText("Nothing to remove");
@@ -260,7 +260,7 @@ void MainWindow::on_ChangeStatusPushButton_clicked()
 {
     int CurrentRow=ui->tableWidget->currentRow();
 
-    if (CurrentRow==0 && ui->tableWidget->rowCount()==1)
+    if (Bugs.empty())
     {
         QMessageBox msgBox;
         msgBox.setText("Cannot change status of an empty row");
@@ -380,7 +380,7 @@ void MainWindow::on_ShowStatsPushButton_clicked()
 
     QtCharts::QChart *BugsInProductsChart=new QtCharts::QChart;
     BugsInProductsChart->addSeries(BugsInProductsBarSeries);
-    BugsInProductsChart->setTitle("Bugs in systems");
+    BugsInProductsChart->setTitle("Bugs in products");
     BugsInProductsChart->setAnimationOptions(QtCharts::QChart::AllAnimations);
     QStringList categories2;
     categories2<<"2020";
