@@ -1,4 +1,4 @@
-# A very simple bugtracker created using Qt.
+# A very simple bugtracker
 
 The app consists of the main window where the user can add and remove bugs on various environments, products and systems, as well as change their status.
 
