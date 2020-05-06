@@ -26,6 +26,17 @@ public:
     qreal BugsInProgressToShowStatistics;
     qreal BugsInEnv1ToShowStatistics;
     qreal BugsInEnv2ToShowStatistics;
+    qreal BugsInSystem1ToShowStatistics;
+    qreal BugsInSystem2ToShowStatistics;
+    qreal BugsInSystem3ToShowStatistics;
+    qreal BugsInSystem4ToShowStatistics;
+    qreal BugsInSystem5ToShowStatistics;
+    qreal BugsInProduct1ToShowStatistics;
+    qreal BugsInProduct2ToShowStatistics;
+    qreal BugsInProduct3ToShowStatistics;
+    qreal BugsInProduct4ToShowStatistics;
+    qreal BugsInProduct5ToShowStatistics;
+
 
 public slots:
     void on_addButton_clicked();
